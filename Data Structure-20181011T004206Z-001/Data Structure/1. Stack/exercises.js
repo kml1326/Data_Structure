@@ -7,17 +7,36 @@
 // size() - the size of the storage
 
 class Stack {
-  constructor() {
+  constructor(str) {
+    if(typeof(str) == "string") {
+      this.string = str;
+    } else return;
   }
   isEmpty() {
+    if(this.string) {
+      return false;
+    } else {
+      return true;
+    }
   }
   push(value) {
+    this.string += `###${value}`; 
   }
   pop() {
+    let lastValue = this.string.lastIndexOf("###");
+    let newString = this.string.substring(0, lastValue);
+    this.string = newString;
+    return this.string;
   }
   peek() {
+    let lastValue = this.string.lastIndexOf("###");
+    let length = this.string.length;
+    let lastStoreValue = this.string.substring(lastValue, length);
+    let lastString = lastStoreValue.substring(3, lastStoreValue.length);
+    return lastString;
   }
   size() {
+    return this.string.length;
   }
 }
 
@@ -31,6 +50,7 @@ class Stack {
 // stack.contains('hello') - true or false
 
 // Write a method named sort() which sorts by value
+
 
 
 // Use This For Testing
