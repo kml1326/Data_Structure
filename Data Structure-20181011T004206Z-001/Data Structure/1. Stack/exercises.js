@@ -6,7 +6,7 @@
 // peek() - displays the last pushed element in the storage
 // size() - the size of the storage
 
-class Stack {
+class StrStack {
   constructor(str) {
     if(typeof(str) == "string") {
       this.string = str;
@@ -52,16 +52,64 @@ class Stack {
 // Write a method named sort() which sorts by value
 
 
+class ObjStack {
+  constructor(capacity) {
+    this.capacity = capacity;  
+    this.i = Object.keys(this).length;
+  }  
+
+  isEmpty() {
+    if(this.i - 1 === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  push(value) {
+    if(Object.keys(this).length - 1 > this.capacity) {
+      return "Max Capacity Reached.";
+    } else
+    this[this.i] = value;
+    let returnedValue = this[this.i] 
+    this.i++;
+    return returnedValue;
+  }
+
+  pop() {
+    let value = this[this.i - 1];
+    delete this[this.i - 1];
+    this.i--;
+    return value;
+  }
+
+  peek() {
+    return this[this.i - 1]; 
+  }
+
+  size() {
+    return this.i - 1;
+  }
+
+  contains(value) {
+    Object.values(this).forEach(objValue => {
+      if(objValue === value) {
+        return true;
+      }
+    }); 
+    return false;
+  }
+}
 
 // Use This For Testing
 
-// var myStack = new Stack(3);
-// console.log(myStack.isEmpty()) // true
-// console.log(myStack.push('a'), 'should be 1');
-// console.log(myStack.push('b'), 'should be 2');
-// console.log(myStack.push('c'), 'should be 3');
-// console.log(myStack.push('d'), 'Max capacity already reached');
-// console.log(myStack.pop(), 'should be c');
-// console.log(myStack.size(), 'should be 2');
-// console.log(myStack.peek(), 'should be b');
-// console.log(myStack.size(), 'should be 2');
+var myStack = new ObjStack(3);
+console.log(myStack.isEmpty()) // true
+console.log(myStack.push('a'), 'should be 1');
+console.log(myStack.push('b'), 'should be 2');
+console.log(myStack.push('c'), 'should be 3');
+console.log(myStack.push('d'), 'Max capacity already reached');
+console.log(myStack.pop(), 'should be c');
+console.log(myStack.size(), 'should be 2');
+console.log(myStack.peek(), 'should be b');
+console.log(myStack.size(), 'should be 2');

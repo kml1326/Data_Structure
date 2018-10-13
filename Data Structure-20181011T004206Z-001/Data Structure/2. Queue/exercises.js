@@ -6,7 +6,7 @@
 // peek() - displays the latest element in the storage
 // size() - the size of the storage
 
-class Queue {
+class StrQueue {
   constructor(str) {
     if(typeof(str) == "string") {
       this.string = str;
@@ -52,3 +52,64 @@ class Queue {
 
 // Write a method named sort() which sorts by value
 
+
+
+class ObjQueue {
+  constructor(capacity) {
+    this.capacity = capacity;  
+    this.i = Object.keys(this).length;
+  }  
+
+  isEmpty() {
+    if(this.i - 1 === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  push(value) {
+    if(Object.keys(this).length - 1 > this.capacity) {
+      return "Max Capacity Reached.";
+    } else
+    this[this.i] = value;
+    let l = Object.values(this).length - 2;
+    for(let j = 0 ,k = 1; j < (l / 2); j++, k++) {
+      let t = this[this.i]
+      this[this.i] = this[k]
+      this[k] = t;
+    }
+    let returnedValue = this[this.i] 
+    this.i++;
+    return returnedValue;
+  }
+
+  pop() {
+    let value = this[this.i - 1];
+    delete this[this.i - 1];
+    this.i--;
+    return value;
+  }
+
+  peek() {
+    return this[this.i - 1]; 
+  }
+
+  size() {
+    return this.i - 1;
+  }
+
+  contains(value) {  
+    let result;
+    (Object.values(this)).forEach(objValue => {
+      console.log(typeof(objValue))
+      if(objValue == value) {
+        result = true;
+      } else  result = false;
+    }); 
+    return result;
+  }
+  sort() {
+    return Object.values(this);
+  }
+}
